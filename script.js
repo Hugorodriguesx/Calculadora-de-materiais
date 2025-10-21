@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- cálculos ---
     const metroQuadrado = largura * comprimento;
-    const cantoneira = Math.ceil((largura + comprimento) / 3);
-    const quantidadePlacas = Math.ceil(metroQuadrado * 2.16);
+    const cantoneira = Math.ceil(((largura * 2) + (comprimento * 2)) / 3);
+    const quantidadePlacas = Math.ceil(metroQuadrado / 2.16);
     const Gn25 = Math.ceil(quantidadePlacas * 28);
     const F530 = Math.ceil(Math.max(largura, comprimento) / 0.6);
     const regulador = Math.ceil(F530 * 2.5);
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="caixa">
         <label>Quantidade de Placas</label></br>
         <input type="text" value="${quantidadePlacas}" readonly>
-      </div>
+      </div> 
       <div class="caixa">
         <label>Quantidade de Cantoneira</label></br>
         <input type="text" value="${cantoneira}" readonly>
