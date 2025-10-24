@@ -18,11 +18,12 @@
     azul: 2
   };
 
-  const precocnt = 2
-  const precorgl = 2
-  const precogn = 2
-  const precotrt = 2
-  const preco530 = 2
+  const precocnt = 6.70
+  const precorgl = 1.50
+  const precogn = 6.00
+  const unidadesgn25 = 50
+  const precotrt = 7.0
+  const preco530 = 9.90
 
   // Pegando os elementos do HTML
   botao.addEventListener("click", () => {
@@ -62,50 +63,82 @@
 
     const precoPlaca = (precoMaterial + precoEstilo) * qtd;
     const precocantoneira = precocnt * cantoneira;
-    const precoGn25 = precogn * Gn25;
+    const pacotesGn25 = Math.ceil(Gn25 / unidadesgn25); // arredonda para o próximo pacote de 50
+    const totalGn25 = pacotesGn25 * unidadesgn25;       // total real de unidades
+    const precoGn25 = pacotesGn25 * precogn;          // preço total conforme pacotes
     const precoF530 = preco530 * F530;
     const precoregulador = precorgl * regulador;
     const precotirante = precotrt * tirante;
 
-    const precoTotal = precoPlaca + precocantoneira + precoGn25 + precoF530 + precoregulador + precotirante;
+    const precoTotal = parseFloat(precoPlaca + precocantoneira + precoGn25 + precoF530 + precoregulador + precotirante);
+
+    // --- formatação do preço ---
+    const precoGn25Formatado = precoGn25.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+});
+    const precoplacaFormatado = precoPlaca.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+});
+    const precotiranteFormatado = precotirante.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+});
+    const precoreguladorFormatado = precoregulador.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+});
+    const precof530Formatado = precoF530.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+});
+    const precocantoneiraFormatado = precocantoneira.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+});
+    const precoTotalFormatado = precoTotal.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+});
 
     // --- exibe resultado na página ---
       resultados.innerHTML = `
       <div class="caixa">
         <label>Quantidade de Placas</label></br>
         <input type="text" value="${quantidadePlacas}" readonly>
-        <input type="text" value="R$ ${precoPlaca}" readonly>
+        <input type="text" value="R$ ${precoplacaFormatado}" readonly>
       </div> 
       <div class="caixa">
         <label>Quantidade de Cantoneira</label></br>
         <input type="text" value="${cantoneira}" readonly>
-        <input type="text" value="R$ ${precocantoneira}" readonly>
+        <input type="text" value="R$ ${precocantoneiraFormatado}" readonly>
       </div>
       <div class="caixa">
         <label>F530</label></br>
         <input type="text" value="${F530}" readonly>
-        <input type="text" value="R$ ${precoF530}" readonly>
+        <input type="text" value="R$ ${precof530Formatado}" readonly>
       </div>
       <div class="caixa">
         <label>Regulador</label></br>
         <input type="text" value="${regulador}" readonly>
-        <input type="text" value="R$ ${precoregulador}" readonly>
+        <input type="text" value="R$ ${precoreguladorFormatado}" readonly>
       </div>
       <div class="caixa">
         <label>Tirante</label></br>
         <input type="text" value="${tirante}" readonly>
-        <input type="text" value="R$ ${precotirante}" readonly>
+        <input type="text" value="R$ ${precotiranteFormatado}" readonly>
       </div>
       <div class="caixa">
         <label>GN25</label></br>
-        <input type="text" value="${Gn25}" readonly>
-        <input type="text" value="R$ ${precoGn25}" readonly>
+        <input type="text" value="${totalGn25}" readonly>
+        <input type="text" value="R$ ${precoGn25Formatado}" readonly>
       </div>
        `;
       Total.innerHTML= `
       <div>
         <label>Total</label></br>
-        <input type="text" value="R$ ${precoTotal}" readonly
+        <input type="text" value="${precoTotalFormatado}" readonly
       </div> 
          
      `;
