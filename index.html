@@ -15,15 +15,37 @@
       <h2>Metros Quadrados</h2>
         <div id="coisinhos">
               <input type="number" id="largura" placeholder="Largura (m)">
-          <p id="metro">x</p>
+            <p id="metro">x</p>
               <input type="number" id="comprimento" placeholder="Comprimento (m)">
         </div>
-          <button id="calcular">Calcular</button>
+           <div id="escolha">
+              <div class="caixa">
+                <label>Material</label>
+                <select id="material" class="custom-select">
+                  <option value="">--Selecione--</option>
+                  <option value="Drywall">Drywall</option>
+                  <option value="Pvc">Pvc</option>
+                  <option value="Gesso">Gesso</option>
+                </select>
+</div>
+              <div class="caixa">
+                <label>Estilo</label>
+                <select id="estilo" class="custom-select">
+                  <option value="">--Selecione--</option>
+                  <option value="branco">branco</option>
+                  <option value="vermelho">vermelho</option>
+                  <option value="azul">azul</option>
+                </select>
+              </div>
+
+           </div>
+      <button id="calcular">Calcular</button>
     </div>
     <hr>
   
-   <div id="resultados" class="grid-resultados">
-  </div>
+    <div id="resultados" class="grid-resultados"></div>
+  <div id="Total" class="grid-resultados"></div>
+  
   </div>
 </body>
 </html>
