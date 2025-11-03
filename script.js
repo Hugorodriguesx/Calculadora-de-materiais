@@ -4,19 +4,37 @@
   const comprimentoInput = document.getElementById("comprimento");
   const botao = document.getElementById("calcular");
   const resultados = document.getElementById("resultados");
+  const materialSelect = document.getElementById("material");
+  const inputExtra = document.getElementById("inputExtra");
 
   // --- lista de preços ---
   const precosMaterial = {
-    Drywall: 2,
-    Pvc: 2,
-    Gesso: 2
+    DrywallTeto: 36.00,
+    DrywalDivisor: 36.00,
+    BrancoLiso: 29.90,
+    brancofrisado: 16.90,
+    amadeirado: 33.90,
   };
+  
+   //  começa escondido
+  inputExtra.classList.remove("show");
 
-  const precosEstilo = {
-    branco: 2,
-    vermelho: 2,
-    azul: 2
-  };
+  //  MOSTRAR/ESCONDER input conforme seleção
+    materialSelect.addEventListener("change", () => {
+    const matee = materialSelect.value;
+
+  if (matee !== "DrywallTeto" && matee !== "DrywallDivisor" && matee !== "") {
+    inputExtra.style.display = "block";
+    // pequeno delay pra permitir que o browser reconheça o display antes da animação
+    setTimeout(() => inputExtra.classList.add("show"), 10);
+  } else {
+    inputExtra.classList.remove("show");
+    // espera o fade-out terminar pra esconder de vez
+    setTimeout(() => (inputExtra.style.display = "none"), 400);
+  }
+});
+
+  // --- lista de preços Drywall ---
 
   const precocnt = 6.70
   const precorgl = 1.50
@@ -25,6 +43,7 @@
   const precotrt = 7.0
   const preco530 = 9.90
 
+  
   // Pegando os elementos do HTML
   botao.addEventListener("click", () => {
     const largura = parseFloat(larguraInput.value);
@@ -36,18 +55,17 @@
     }
 
     const materialSelect = document.getElementById("material");
-    const estiloSelect = document.getElementById("estilo");
 
     const mat = materialSelect.value
-    const est = estiloSelect.value
-
+    
     // se nada for selecionado, retorna
-    if (!mat || !est) {
-      alert("Selecione o material e o estilo.");
+    if (!mat) {
+      alert("Selecione o material.");
       return;
     }
     
-    // --- cálculos ---
+    // --- cálculos Drywall Teto---
+    if (mat === "DrywallTeto"){
     const metroQuadrado = largura * comprimento;
     const cantoneira = Math.ceil(((largura * 2) + (comprimento * 2)) / 3);
     const quantidadePlacas = Math.ceil(metroQuadrado / 2.16);
@@ -59,9 +77,8 @@
     // --- cálculos preços ---
     const qtd = quantidadePlacas; // pode ser ajustado se quiser outro input
     const precoMaterial = precosMaterial[mat] || 0;
-    const precoEstilo = precosEstilo[est] || 0;
 
-    const precoPlaca = (precoMaterial + precoEstilo) * qtd;
+    const precoPlaca = precoMaterial * qtd;
     const precocantoneira = precocnt * cantoneira;
     const pacotesGn25 = Math.ceil(Gn25 / unidadesgn25); // arredonda para o próximo pacote de 50
     const totalGn25 = pacotesGn25 * unidadesgn25;       // total real de unidades
@@ -70,7 +87,13 @@
     const precoregulador = precorgl * regulador;
     const precotirante = precotrt * tirante;
 
-    const precoTotal = parseFloat(precoPlaca + precocantoneira + precoGn25 + precoF530 + precoregulador + precotirante);
+    const precoTotal = parseFloat(
+      precoPlaca +
+      precocantoneira +
+      precoGn25 +
+      precoF530 +
+      precoregulador +
+      precotirante);
 
     // --- formatação do preço ---
     const precoGn25Formatado = precoGn25.toLocaleString("pt-BR", {
@@ -141,6 +164,15 @@
         <input type="text" value="${precoTotalFormatado}" readonly
       </div> 
          
-     `;
+     `;}
+     
+     else if ( "BrancoLiso" || "brancoFrisado" || "amadeirado") {
+        
+        if (isNaN(inputExtra) || inputExtra <= 0) {
+          alert("Por favor, insira valores válidos para o tamanho da peça.");
+          return;
+    }
+      
+     }
   });
 });

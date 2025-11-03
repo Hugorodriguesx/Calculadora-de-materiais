@@ -132,18 +132,18 @@ font-size: 20px;
   -moz-appearance: none;
   background-color: #333;    
   color: white;              
-  padding: 8px 12px;
-  border-radius: 6px;
+  padding: 10px 22px;
+  border-radius: 202px;
   border: 1px solid #555;
   font-size: 14px;
-  
 }
+
 
 .custom-select {
   background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="14" viewBox="0 0 20 20" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M5.516 7.547L10 12.03l4.484-4.483L16 8.548 10 14.548l-6-6z"/></svg>');
   background-repeat: no-repeat;
   background-position: right 8px center;
-  background-size: 14px;
+  background-size: 10px;
 }
 
 .custom-select:focus {
@@ -166,3 +166,26 @@ gap: 10px;
 font-size: 20px;
 margin-top: 30px;
 }
+
+#detalhe {
+border-radius: 20px;
+margin-left: 20px;
+margin-right: 20px;
+margin-top: 20px;
+text-align: center;
+}
+
+#inputExtra {
+  display: none;              
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#inputExtra.show {
+  display: block;             
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
