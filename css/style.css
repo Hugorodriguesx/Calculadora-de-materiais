@@ -175,17 +175,23 @@ margin-top: 20px;
 text-align: center;
 }
 
-#inputExtra {
-  display: none;              
-  opacity: 0;
-  transform: translateY(-8px);
+#inputExtra { 
+  display: none;
+  opacity: 0; transform: translateY(-8px);
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 #inputExtra.show {
-  display: block;             
-  opacity: 1;
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;       /* centraliza verticalmente */
+  justify-content: center;   /* centraliza horizontalmente */
+  gap: 12px;                 /* espaço entre os campos */
+  opacity: 1; 
   transform: translateY(0);
 }
 
-
+#inputExtra select {
+  position: relative;
+  top: 10px; /* abaixa levemente os selects para alinhar com o input */
+}
