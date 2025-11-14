@@ -9,6 +9,7 @@ export function calcularPvc(
   inputExtra2, // "Sanca" ou "RodaForro"
   precosanca,
   precosacabamentoselect,
+  precossancaamadeirado,
   Acabamento
 ) {
 
@@ -49,7 +50,11 @@ export function calcularPvc(
   const precoFolha = precoAcabamentoEscolhido * folha;
 
   // preço do item escolhido (Sanca ou Roda Forro)
-  const precoSancaOuForro = (precosanca[inputExtra2] || 0) * acabamento;
+  let precoSancaOuForro = 0;
+  if (Acabamento === "Amadeirado"){
+    precoSancaOuForro = precossancaamadeirado[inputExtra2] * acabamento;
+}   else {
+    precoSancaOuForro = precosanca[inputExtra2] * acabamento; } 
 
   // preços dos demais itens
   const precoMetalon = metalon * oprecometalon;

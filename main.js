@@ -26,8 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const precossanca = {
-    RodaForro: 2,
-    Sanca: 1,
+    RodaForro: 25.90,
+    Sanca: 26.90,
+  }
+
+  const precossancaamadeirado = {
+    RodaForro: 27.90,
+    Sanca: 29.90,
   }
 
   // começa escondido
@@ -130,6 +135,7 @@ const inputExtra = parseFloat(document.getElementById("detalhe").value);
     inputExtra2,
     precossanca,
     precosacabamentoselect,
+    precossancaamadeirado,
     Acabamento
   );
     }
