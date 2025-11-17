@@ -17,9 +17,9 @@ export function calcularPvc(
   const oprecometalon = 19.00;
   const oprecosubestrutura = 19.00;
   const oprecopacoteparafusopa = 7.50;
-  const oprecopacoteparafuso35 = 6.50;
-  const oprecobucha = 4.50;
-  const oprecoacabamentodecanto = 4.00;
+  const oprecopacoteparafuso35 = 7.50;
+  const oprecobucha = 6.50;
+  const oprecoacabamentodecanto = 4.50;
 
   // cálculos base
   const metroQuadrado = largura * comprimento;
@@ -47,7 +47,7 @@ export function calcularPvc(
 
   // --- preços de acabamento e sanca ---
   const precoAcabamentoEscolhido = precosacabamentoselect[Acabamento] || 0;
-  const precoFolha = precoAcabamentoEscolhido * folha;
+  const precoFolha = (((inputExtra * 2) / 10)) * precoAcabamentoEscolhido * folha;
 
   // preço do item escolhido (Sanca ou Roda Forro)
   let precoSancaOuForro = 0;
