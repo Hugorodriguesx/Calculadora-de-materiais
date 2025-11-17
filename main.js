@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const materialSelect = document.getElementById("material");
   const inputExtra = document.getElementById("inputExtra");
   const inputExtra2 = document.getElementById("inputExtra2");
+  const resetar = document.getElementById("resetar");
+
   // --- lista de preços ---
   const precosMaterial = {
     DrywallTeto: 36.0,
@@ -28,16 +30,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const precossanca = {
     RodaForro: 25.90,
     Sanca: 26.90,
-  }
+  };
 
   const precossancaamadeirado = {
     RodaForro: 27.90,
     Sanca: 29.90,
-  }
+  };
 
   // começa escondido
-  inputExtra.classList.remove("show");
-  inputExtra2.classList.remove("show");
+  inputExtra.style.display = "none";
+  inputExtra2.style.display = "none";
+  resetar.style.display = "none";
+
+  const loading = document.getElementById("loading-screen");
+
+  function mostrarLoading() {
+    loading.style.display = "flex";
+  }
+
+  function esconderLoading() {
+    loading.style.display = "none";
+  }
 
   // MOSTRAR/ESCONDER input conforme seleção
   materialSelect.addEventListener("change", () => {
@@ -56,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Pegando os elementos do HTML
+  // BOTÃO CALCULAR
   botao.addEventListener("click", () => {
     const largura = parseFloat(larguraInput.value);
     const comprimento = parseFloat(comprimentoInput.value);
@@ -73,71 +86,110 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const mat = materialSelect.value;
 
-    // se nada for selecionado, retorna
     if (!mat) {
       alert("Selecione o material.");
       return;
     }
 
-    // --- cálculos Drywall Teto ---
-    if (mat === "DrywallTeto") {
-      calculardrywallTeto(
-        largura,
-        comprimento,
-        precosMaterial,
-        mat,
-        resultados,
-        Total
-      );
-    } else if (mat === "DrywallDivisor") {
-      calculardrywallDivisor(
-        largura,
-        comprimento,
-        precosMaterial,
-        mat,
-        resultados,
-        Total
-      );
-    } else if (mat === "ForroPvc") {
-const inputExtra = parseFloat(document.getElementById("detalhe").value);
-  const inputExtra2 = document.getElementById("inputExtra2").value;
+    // --- LOADING AO CALCULAR ---
+    mostrarLoading();
 
-  if (
-    isNaN(inputExtra) ||
-    inputExtra <= 0 ||
-    !(inputExtra === largura || inputExtra === comprimento)
-  ) {
-    alert("Por favor, insira valores válidos para o tamanho da peça.");
-    return;
-  }
+    setTimeout(() => {
+      if (mat === "DrywallTeto") {
+        calculardrywallTeto(
+          largura,
+          comprimento,
+          precosMaterial,
+          mat,
+          resultados,
+          Total
+        );
+      } else if (mat === "DrywallDivisor") {
+        calculardrywallDivisor(
+          largura,
+          comprimento,
+          precosMaterial,
+          mat,
+          resultados,
+          Total
+        );
+      } else if (mat === "ForroPvc") {
+        const detalheVal = parseFloat(document.getElementById("detalhe").value);
+        const extra2Val = document.getElementById("inputExtra2").value;
 
-  const AcabamentoSelect = document.getElementById("acabamento");
-  const Acabamento = AcabamentoSelect.value;
+        if (
+          isNaN(detalheVal) ||
+          detalheVal <= 0 ||
+          !(detalheVal === largura || detalheVal === comprimento)
+        ) {
+          alert("Por favor, insira valores válidos para o tamanho da peça.");
+          esconderLoading();
+          return;
+        }
 
-  if (!Acabamento) {
-    alert("Selecione o acabamento.");
-    return;
-  }
+        const AcabamentoSelect = document.getElementById("acabamento");
+        const Acabamento = AcabamentoSelect.value;
 
-  if (!inputExtra2) {
-    alert("Selecione uma das opções (Sanca ou Roda Forro).");
-    return;
-  }
+        if (!Acabamento) {
+          alert("Selecione o acabamento.");
+          esconderLoading();
+          return;
+        }
 
-  calcularPvc(
-    largura,
-    comprimento,
-    precosMaterial,
-    mat,
-    resultados,
-    Total,
-    inputExtra,
-    inputExtra2,
-    precossanca,
-    precosacabamentoselect,
-    precossancaamadeirado,
-    Acabamento
-  );
-    }
+        if (!extra2Val) {
+          alert("Selecione uma das opções (Sanca ou Roda Forro).");
+          esconderLoading();
+          return;
+        }
+
+        calcularPvc(
+          largura,
+          comprimento,
+          precosMaterial,
+          mat,
+          resultados,
+          Total,
+          detalheVal,
+          extra2Val,
+          precossanca,
+          precosacabamentoselect,
+          precossancaamadeirado,
+          Acabamento
+        );
+      }
+
+      esconderLoading();
+      resetar.style.display = "block";
+
+    }, 500); // pequeno delay para o loading aparecer
   });
+
+  // BOTÃO RESET
+  resetar.addEventListener("click", () => {
+    mostrarLoading();
+
+    setTimeout(() => {
+
+      larguraInput.value = "";
+      comprimentoInput.value = "";
+      materialSelect.value = "";
+      document.getElementById("acabamento").value = "";
+      document.getElementById("inputExtra2").value = "";
+      document.getElementById("detalhe").value = "";
+
+      inputExtra.classList.remove("show");
+      inputExtra.style.display = "none";
+      inputExtra2.classList.remove("show");
+      inputExtra2.style.display = "none";
+
+      resultados.innerHTML = "";
+      Total.innerHTML = "";
+
+      resetar.style.display = "none";
+
+      esconderLoading();
+
+    }, 400);
+  });
+
 });

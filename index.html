@@ -30,7 +30,6 @@
           </div>
         </div>
 
-       
         <div id="inputExtra">
           <input type="number" id="detalhe" placeholder="Tamanho da Peça" />
           <select id="acabamento" class="custom-select">
@@ -39,20 +38,29 @@
             <option value="BrancoFrisado">Branco Frisado</option>
             <option value="Amadeirado">Amadeirado</option>
           </select>
-        
+
           <select id="inputExtra2" class="custom-select">
             <option value="">-- Selecione --</option>
             <option value="RodaForro">Roda Forro</option>
             <option value="Sanca">Sanca</option>
           </select>
         </div>
-      <div>
+        <div>
+          <div id="loading-screen">
+            <div class="dots-loading">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+
         <button id="calcular">Calcular</button>
       </div>
       <hr />
 
       <div id="resultados" class="grid-resultados"></div>
-      <div id="Total" class="grid-resultados"></div>
+      
+      <div id="Total"></div>
+    <div id="reset"><button id="resetar" style="display: none">Voltar ↩</button></div>
     </div>
   </body>
 </html>

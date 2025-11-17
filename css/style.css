@@ -5,8 +5,8 @@ body {
   font-family: "Inter", sans-serif;
   color: white;
   height: 100vh;
-
 }
+
 
 #container {
   padding: 2rem;
@@ -195,3 +195,68 @@ text-align: center;
   position: relative;
   top: 10px; /* abaixa levemente os selects para alinhar com o input */
 }
+
+#reset {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+#resetar {
+  display: none;
+  padding: 6px 16px;
+  font-size: 14px;
+  background: #e42938;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: 0.2s;
+  
+}
+
+#resetar:hover {
+  transform: translateY(-2px);
+  background: #f10519;
+  box-shadow: 0 6px 14px rgba(180, 2, 2, 0.788);
+  
+}
+
+
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+}
+
+.dots-loading {
+  display: flex;
+  gap: 8px;
+}
+
+.dots-loading span {
+  width: 12px;
+  height: 12px;
+  background: #4f9cff;
+  border-radius: 50%;
+  animation: jump 0.6s infinite ease-in-out;
+}
+
+.dots-loading span:nth-child(2) { animation-delay: 0.15s; }
+.dots-loading span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes jump {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+
