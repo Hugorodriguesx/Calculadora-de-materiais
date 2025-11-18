@@ -45,7 +45,8 @@ export function calcularPvc(
   const perimetro = largura * 2 + comprimento * 2;
 
   // peças considerando reaproveitamento
-  const acabamentodecanto = Math.ceil(perimetro / 6);
+  const acabamentodecantosobra = Math.ceil(perimetro / 6);
+  const acabamentodecanto = acabamentodecantosobra < 4 ? 4 : acabamentodecantosobra;
 
   // --- preços de acabamento e sanca ---
   const precoAcabamentoEscolhido = precosacabamentoselect[Acabamento] || 0;
