@@ -42,7 +42,10 @@ export function calcularPvc(
   const Quantidadeparafuso35 = pacoteparafuso35 * 50;
   const pacotebucha = Math.ceil(metroQuadrado / 20);
   const QuantidadeBucha = pacotebucha * 50;
-  const acabamentodecanto = Math.ceil(metroQuadrado / 6);
+  const perimetro = largura * 2 + comprimento * 2;
+
+  // peças considerando reaproveitamento
+  const acabamentodecanto = Math.ceil(perimetro / 6);
 
   // --- preços de acabamento e sanca ---
   const precoAcabamentoEscolhido = precosacabamentoselect[Acabamento] || 0;
