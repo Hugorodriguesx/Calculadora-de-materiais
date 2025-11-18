@@ -28,7 +28,10 @@ export function calculardrywallDivisor(
   const quantidadeGn25 = pacotesGn25 * 50;
   const pacoteparafuso = Math.ceil(metroQuadrado / 20);
   const Quantidadeparafuso = pacoteparafuso * 50;
-  const bucha = Quantidadeparafuso;
+
+  const pacotebucha = Math.ceil(metroQuadrado / 20);
+  const Quantidadebucha = pacotebucha * 50;
+  const bucha = Quantidadebucha;
   const espacamento = 0.6;
   const tamanhoPeca = 3;
 
@@ -81,7 +84,7 @@ export function calculardrywallDivisor(
   const precomontante = montante * oprecomontante;
   const precogn25 = pacotesGn25 * oprecogn;
   const precoparafusopa = pacoteparafuso * oprecopacoteparafusopf;
-  const precobucha = bucha * oprecobucha;
+  const precobucha = pacotebucha * oprecobucha;
 
     //cálculos preço final
     const precoTotal = precofita+precomassa+precoplaca+precoguia+precomontante+ precogn25+precoparafusopa+precobucha

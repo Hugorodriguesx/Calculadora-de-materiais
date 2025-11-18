@@ -69,13 +69,16 @@ export function calculardrywallTeto(
       : metroQuadrado < 30
       ? precomassa15
       : metroQuadrado < 50
-      ? precomassa25
+      ? precomassa25 
       : precomassa25;
   const qtdGn35 = totalGn25 / 2;
   const pacotesGn35 = Math.ceil(qtdGn35 / 50);
   const totalGn35 = pacotesGn35 * 50;
   const precoGn35 = pacotesGn35 * precogn35;
-  const precobucha = totalGn35 * bucha;
+  const qtdbucha = totalGn25 / 2;
+  const pacotesbucha = Math.ceil(qtdbucha / 50);
+  const totalbucha = pacotesbucha * 50;
+  const precobucha = pacotesbucha * bucha;
   const fita = metroQuadrado < 45 ? "Fita 45" : "Fita 90";
   const precofita = metroQuadrado < 10 ? precofita45 : precofita90;
 
