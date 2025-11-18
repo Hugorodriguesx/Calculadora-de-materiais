@@ -12,14 +12,13 @@ export function calcularPvc(
   precossancaamadeirado,
   Acabamento
 ) {
-
   // preços fixos
-  const oprecometalon = 19.00;
-  const oprecosubestrutura = 19.00;
-  const oprecopacoteparafusopa = 7.50;
-  const oprecopacoteparafuso35 = 7.50;
-  const oprecobucha = 6.50;
-  const oprecoacabamentodecanto = 4.50;
+  const oprecometalon = 19.0;
+  const oprecosubestrutura = 19.0;
+  const oprecopacoteparafusopa = 7.5;
+  const oprecopacoteparafuso35 = 7.5;
+  const oprecobucha = 6.5;
+  const oprecoacabamentodecanto = 4.5;
 
   // cálculos base
   const metroQuadrado = largura * comprimento;
@@ -43,18 +42,29 @@ export function calcularPvc(
   const Quantidadeparafuso35 = pacoteparafuso35 * 50;
   const pacotebucha = Math.ceil(metroQuadrado / 20);
   const QuantidadeBucha = pacotebucha * 50;
-  const acabamentodecanto = 4;
+  const acabamentodecanto = Math.ceil(metroQuadrado / 6);
 
   // --- preços de acabamento e sanca ---
   const precoAcabamentoEscolhido = precosacabamentoselect[Acabamento] || 0;
-  const precoFolha = (((inputExtra * 2) / 10)) * precoAcabamentoEscolhido * folha;
+  // tamanhos disponíveis
+  const tamanhosFolha = [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 5.0, 6.0, 7.0];
+
+  // encontra o tamanho correto, arredondado para cima
+  const tamanhoFolhaEscolhido =
+    tamanhosFolha.find((t) => t >= inputExtra) ||
+    tamanhosFolha[tamanhosFolha.length - 1];
+
+  // cálculo do preço da folha usando o tamanho real
+  const precoFolha =
+    ((tamanhoFolhaEscolhido * 2) / 10) * precoAcabamentoEscolhido * folha;
 
   // preço do item escolhido (Sanca ou Roda Forro)
   let precoSancaOuForro = 0;
-  if (Acabamento === "Amadeirado"){
+  if (Acabamento === "Amadeirado") {
     precoSancaOuForro = precossancaamadeirado[inputExtra2] * acabamento;
-}   else {
-    precoSancaOuForro = precosanca[inputExtra2] * acabamento; } 
+  } else {
+    precoSancaOuForro = precosanca[inputExtra2] * acabamento;
+  }
 
   // preços dos demais itens
   const precoMetalon = metalon * oprecometalon;
