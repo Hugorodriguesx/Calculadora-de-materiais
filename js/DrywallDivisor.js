@@ -70,7 +70,7 @@ export function calculardrywallDivisor(
 
   //cálculos preços individuais
   const precoMaterial = precosMaterial[mat] || 0;
-  const precofita = metroQuadrado < 10 ? precofita45 : precofita90;
+  const precofita = metroQuadrado < 45 ? precofita45 : precofita90;
   const precomassa =
     metroQuadrado < 10
       ? precomassa5

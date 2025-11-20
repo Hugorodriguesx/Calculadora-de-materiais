@@ -80,7 +80,7 @@ export function calculardrywallTeto(
   const totalbucha = pacotesbucha * 50;
   const precobucha = pacotesbucha * bucha;
   const fita = metroQuadrado < 45 ? "Fita 45" : "Fita 90";
-  const precofita = metroQuadrado < 10 ? precofita45 : precofita90;
+  const precofita = metroQuadrado < 45 ? precofita45 : precofita90;
 
   // Cálculo do preço final
   const precoTotal =
