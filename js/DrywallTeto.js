@@ -63,6 +63,8 @@ export function calculardrywallTeto(
       : metroQuadrado < 50
       ? "Massa 25Kg"
       : "Massa 25Kg";
+  const quantidademassa =
+    metroQuadrado < 50 ? 1 : Math.ceil(metroQuadrado / 50);
   const precomassa =
     metroQuadrado < 10
       ? precomassa5
@@ -70,7 +72,7 @@ export function calculardrywallTeto(
       ? precomassa15
       : metroQuadrado < 50
       ? precomassa25 
-      : precomassa25;
+      : precomassa25 * quantidademassa;
   const qtdGn35 = totalGn25 / 2;
   const pacotesGn35 = Math.ceil(qtdGn35 / 50);
   const totalGn35 = pacotesGn35 * 50;
@@ -80,7 +82,8 @@ export function calculardrywallTeto(
   const totalbucha = pacotesbucha * 50;
   const precobucha = pacotesbucha * bucha;
   const fita = metroQuadrado < 45 ? "Fita 45" : "Fita 90";
-  const precofita = metroQuadrado < 45 ? precofita45 : precofita90;
+  const quantidadefita = metroQuadrado < 45 ? 1 : Math.ceil(metroQuadrado / 90);
+  const precofita = metroQuadrado < 45 ? precofita45 : precofita90 * quantidadefita;
 
   // Cálculo do preço final
   const precoTotal =
@@ -159,14 +162,14 @@ export function calculardrywallTeto(
 
       <div class="caixa">
         <label>Massa</label></br>
-        <input type="text" value="${massa}" readonly>
+        <input type="text" value="${quantidademassa} ${massa}" readonly>
         <input type="text" value="${format(precomassa)}" readonly>
       </div>
 
       
       <div class="caixa">
         <label>Fita</label></br>
-        <input type="text" value="${fita}" readonly>
+        <input type="text" value="${quantidadefita} ${fita}" readonly>
         <input type="text" value="${format(precofita)}" readonly>
       </div>
   `;

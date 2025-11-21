@@ -11,13 +11,12 @@ export function calculardrywallDivisor(
   const oprecomontante = 14.0;
   const oprecogn = 6.0;
   const oprecopacoteparafusopf = 12.0;
-  const oprecobucha = 6.50;
+  const oprecobucha = 6.5;
   const precomassa5 = 24.9;
   const precomassa15 = 45.0;
   const precomassa25 = 59.0;
   const precofita45 = 14.0;
   const precofita90 = 24.0;
-  
 
   //cálculos dos materiais
   const metroQuadrado = largura * comprimento;
@@ -70,7 +69,11 @@ export function calculardrywallDivisor(
 
   //cálculos preços individuais
   const precoMaterial = precosMaterial[mat] || 0;
-  const precofita = metroQuadrado < 45 ? precofita45 : precofita90;
+  const quantidadefita = metroQuadrado < 45 ? 1 : Math.ceil(metroQuadrado / 90);
+  const precofita =
+    metroQuadrado < 45 ? precofita45 : precofita90 * quantidadefita;
+  const quantidademassa =
+    metroQuadrado < 50 ? 1 : Math.ceil(metroQuadrado / 50);
   const precomassa =
     metroQuadrado < 10
       ? precomassa5
@@ -78,7 +81,7 @@ export function calculardrywallDivisor(
       ? precomassa15
       : metroQuadrado < 50
       ? precomassa25
-      : precomassa25;
+      : precomassa25 * quantidademassa;
   const precoplaca = precosMaterial[mat] * quantidadePlacas;
   const precoguia = guia * oprecoguia;
   const precomontante = montante * oprecomontante;
@@ -86,8 +89,16 @@ export function calculardrywallDivisor(
   const precoparafusopa = pacoteparafuso * oprecopacoteparafusopf;
   const precobucha = pacotebucha * oprecobucha;
 
-    //cálculos preço final
-    const precoTotal = precofita+precomassa+precoplaca+precoguia+precomontante+ precogn25+precoparafusopa+precobucha
+  //cálculos preço final
+  const precoTotal =
+    precofita +
+    precomassa +
+    precoplaca +
+    precoguia +
+    precomontante +
+    precogn25 +
+    precoparafusopa +
+    precobucha;
 
   //formatação
   const format = (v) =>
@@ -139,14 +150,14 @@ export function calculardrywallDivisor(
 
       <div class="caixa">
         <label>Massa</label></br>
-        <input type="text" value="${massa}" readonly>
+        <input type="text" value="${quantidademassa} ${massa}" readonly>
         <input type="text" value="${format(precomassa)}" readonly>
       </div>
 
       
       <div class="caixa">
         <label>Fita</label></br>
-        <input type="text" value="${fita}" readonly>
+        <input type="text" value="${quantidadefita} ${fita}" readonly>
         <input type="text" value="${format(precofita)}" readonly>
       </div>
   `;
